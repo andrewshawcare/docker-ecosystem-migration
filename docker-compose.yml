@@ -1,0 +1,13 @@
+version: "2"
+volumes:
+  database-data:
+services:
+  docker-ecosystem-migration:
+    image: ${REGISTRY}/docker-ecosystem-migration:${IMAGE_VERSION}
+    build: .
+    links:
+      - database
+  database:
+    image: postgres:9.5.1
+    volumes:
+      - database-data:/var/lib/postgres/data
