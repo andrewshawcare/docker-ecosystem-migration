@@ -11,6 +11,7 @@ WORKDIR /flyway-${flyway_version}
 COPY ./conf conf
 COPY ./sql sql
 
+COPY ./wait-for-it.sh /
 COPY ./docker-entrypoint.sh /
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/wait-for-it.sh", "database:5432", "--", "/docker-entrypoint.sh"]
