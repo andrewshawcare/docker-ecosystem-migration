@@ -4,6 +4,7 @@ node {
   env.IMAGE_TAG = env.GIT_COMMIT
 
   stage('build') {
+    sh 'env'
     sh "docker build --tag \"${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}\" ."
     sh "docker push \"${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}\""
   }
