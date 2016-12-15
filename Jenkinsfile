@@ -1,10 +1,9 @@
 node {
   env.REGISTRY_HOST = 'registry:5000'
   env.IMAGE_NAME = env.JOB_NAME
-  env.IMAGE_TAG = env.GIT_COMMIT
+  env.IMAGE_TAG = sh(returnStdout: true, script: 'git rev-parse HEAD')
 
   stage('build') {
-    sh 'env'
     sh "docker build --tag \"${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}\" ."
     sh "docker push \"${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}\""
   }
