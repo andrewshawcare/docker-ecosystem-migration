@@ -3,6 +3,7 @@ node {
 
   env.REGISTRY_HOST = 'localhost:5000'
   env.IMAGE_NAME = env.JOB_NAME
+  env.SERVICE_NAME = env.IMAGE_NAME
   env.IMAGE_TAG = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
 
   stage('build') {
@@ -11,7 +12,7 @@ node {
   }
   stage('test') {
     sh 'docker-compose pull'
-    sh "docker-compose run --rm \"${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}\" test"
+    sh "docker-compose run --rm \"${SERVICE_NAME}\" test"
   }
   stage('push') {
     sh "docker tag \"${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}\" \"${REGISTRY_HOST}/${IMAGE_NAME}:latest\""
