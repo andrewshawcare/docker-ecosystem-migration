@@ -1,4 +1,6 @@
 node {
+  git credentialsId: '11d1f04e-b933-4f33-8545-4c989449c859', url: 'https://github.com/andrewshawcare/docker-ecosystem-migration.git'
+
   env.REGISTRY_HOST = 'registry:5000'
   env.IMAGE_NAME = env.JOB_NAME
   env.IMAGE_TAG = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
