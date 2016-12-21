@@ -3,7 +3,7 @@ volumes:
   database-data:
 services:
   docker-ecosystem-migration:
-    image: ${REGISTRYHOST}/docker-ecosystem-migration:${TAG}
+    image: ${REGISTRY_HOST}/docker-ecosystem-migration:${IMAGE_TAG}
     build: .
     links:
       - database
