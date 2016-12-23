@@ -15,7 +15,8 @@ node {
   }
   stage('test') {
     sh 'docker-compose pull'
-    sh "docker-compose run --rm \"${SERVICE_NAME}\" test"
+    sh "docker-compose run \"${SERVICE_NAME}\" test"
+    sh 'docker-compose down --volumes'
   }
   stage('push') {
     sh "docker tag \"${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}\" \"${REGISTRY_HOST}/${IMAGE_NAME}:latest\""
