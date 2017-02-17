@@ -1,9 +1,5 @@
 node {
-  git(
-    credentialsId: env.GIT_CREDENTIALS_ID,
-    url: 'https://github.com/andrewshawcare/docker-ecosystem-migration.git',
-    poll: true
-  )
+  checkout scm
 
   env.IMAGE_NAME = env.JOB_NAME
   env.IMAGE_TAG = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
