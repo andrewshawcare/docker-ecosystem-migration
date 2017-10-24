@@ -16,10 +16,10 @@ test:
 
 push:
   script: |
-    docker tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" "${REGISTRY_HOST}/${IMAGE_NAME}:latest"
+    docker tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" "${REGISTRY_HOST}/${IMAGE_NAME}:latest" && \
     docker push "${REGISTRY_HOST}/${IMAGE_NAME}:latest"
 
 deploy:
   script: |
-    docker-compose pull
+    docker-compose pull && \
     docker-compose up -d
