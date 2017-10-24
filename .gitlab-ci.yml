@@ -1,0 +1,25 @@
+variables:
+  IMAGE_NAME: $CI_PROJECT_NAME
+  IMAGE_TAG: $CI_COMMIT_SHA
+  SERVICE_NAME: $CI_PROJECT_NAME
+
+build:
+  script: |
+    docker build --tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" . && \
+    docker push "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}"
+
+test:
+  script: |
+    docker-compose pull && \
+    docker-compose run "${SERVICE_NAME}" test ; \
+    docker-compose down --volumes
+
+push:
+  script: |
+    docker tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" "${REGISTRY_HOST}/${IMAGE_NAME}:latest"
+    docker push "${REGISTRY_HOST}/${IMAGE_NAME}:latest"
+
+deploy:
+  script: |
+    docker-compose pull
+    docker-compose up -d
