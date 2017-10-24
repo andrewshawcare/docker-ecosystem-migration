@@ -5,21 +5,21 @@ variables:
 
 build:
   script: |
-    docker build --tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" . && \
+    docker build --tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" .
     docker push "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}"
 
 test:
   script: |
-    docker-compose pull && \
-    docker-compose run "${SERVICE_NAME}" test ; \
+    docker-compose pull
+    docker-compose run "${SERVICE_NAME}" test
     docker-compose down --volumes
 
 push:
   script: |
-    docker tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" "${REGISTRY_HOST}/${IMAGE_NAME}:latest" && \
+    docker tag "${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}" "${REGISTRY_HOST}/${IMAGE_NAME}:latest"
     docker push "${REGISTRY_HOST}/${IMAGE_NAME}:latest"
 
 deploy:
   script: |
-    docker-compose pull && \
+    docker-compose pull
     docker-compose up -d
