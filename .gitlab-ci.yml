@@ -40,6 +40,5 @@ deploy:
 trigger:
   stage: trigger
   script: |
-    echo "${CI_JOB_TOKEN}"
-    curl --request POST --form "token=${CI_JOB_TOKEN}" --form ref=master "http://gitlab-ce/api/v4/projects/${DOCKER_ECOSYSTEM_JAVA_SERVICE_PROJECT_ID}/trigger/pipeline"
-    curl --request POST --form "token=${CI_JOB_TOKEN}" --form ref=master "http://gitlab-ce/api/v4/projects/${DOCKER_ECOSYSTEM_NODE_SERVICE_PROJECT_ID}/trigger/pipeline"
+    curl --request POST --form "token=${CI_JOB_TOKEN}" --form 'ref=master' "http://gitlab-ce/api/v4/projects/2/trigger/pipeline"
+    curl --request POST --form "token=${CI_JOB_TOKEN}" --form 'ref=master' "http://gitlab-ce/api/v4/projects/3/trigger/pipeline"
