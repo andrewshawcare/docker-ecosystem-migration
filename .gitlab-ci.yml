@@ -2,8 +2,6 @@ variables:
   IMAGE_NAME: $CI_PROJECT_NAME
   IMAGE_TAG: $CI_COMMIT_SHA
   SERVICE_NAME: $CI_PROJECT_NAME
-  DOCKER_ECOSYSTEM_JAVA_SERVICE_PROJECT_ID: 2
-  DOCKER_ECOSYSTEM_NODE_SERVICE_PROJECT_ID: 3
 
 stages:
   - build
@@ -40,5 +38,5 @@ deploy:
 trigger:
   stage: trigger
   script: |
-    curl --request POST --form "token=${CI_JOB_TOKEN}" --form 'ref=master' "http://gitlab-ce/api/v4/projects/${DOCKER_ECOSYSTEM_JAVA_SERVICE_PROJECT_ID}/trigger/pipeline"
-    curl --request POST --form "token=${CI_JOB_TOKEN}" --form 'ref=master' "http://gitlab-ce/api/v4/projects/${DOCKER_ECOSYSTEM_NODE_SERVICE_PROJECT_ID}/trigger/pipeline"
+    curl --request POST --form "token=${DOCKER_ECOSYSTEM_JAVA_SERVICE_TRIGGER_TOKEN}" --form 'ref=master' "http://gitlab-ce/api/v4/projects/root%2fdocker-ecosystem-java-service/trigger/pipeline"
+    curl --request POST --form "token=${DOCKER_ECOSYSTEM_NODE_SERVICE_TRIGGER_TOKEN}" --form 'ref=master' "http://gitlab-ce/api/v4/projects/root%2fdocker-ecosystem-node-service/trigger/pipeline"
